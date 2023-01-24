@@ -68,6 +68,51 @@ nav {
   margin-bottom: 2em;
 }
 
+.prev-btn {
+  border: none;
+  background: none;
+  width: 10vw !important; /* Bootstrap Row width override */
+  height: 30%;
+  left: 0vw;
+  transform: rotate(180deg);
+  position: absolute;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.next-btn {
+  border: none;
+  background: none;
+  width: 10vw !important; /* Bootstrap Row width override */
+  height: 30%;
+  right: 0vw;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.slider-btn:hover {
+  transition: 0.3s;
+  filter: invert(90%) sepia(19%) saturate(2584%) hue-rotate(283deg) brightness(89%) contrast(87%);
+}
+
+.inactive {
+  transition: 1s;
+  opacity: 0;
+}
+
+.next{
+  transform: translateX(-100px);
+}
+
+.prev{
+  transform: translateX(+100px);
+}
+
 .skills {
   display: flex;
   justify-content: space-between;
@@ -88,9 +133,6 @@ nav {
 
 .skillCard:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.isActive {
 }
 
 .cardImg {
