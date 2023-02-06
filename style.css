@@ -64,6 +64,7 @@ nav {
 }
 
 .about {
+  font-size: large;
   margin-top: 1.8em;
   margin-bottom: 2em;
 }
@@ -97,35 +98,39 @@ nav {
 
 .slider-btn:hover {
   transition: 0.3s;
-  filter: invert(90%) sepia(19%) saturate(2584%) hue-rotate(283deg) brightness(89%) contrast(87%);
+  filter: invert(90%) sepia(19%) saturate(2584%) hue-rotate(283deg)
+    brightness(89%) contrast(87%);
 }
 
 .inactive {
-  transition: 1s;
+  transition: 0.6s;
+  filter: brightness(60%);
   opacity: 0;
+  visibility: hidden;
+  position: absolute;
 }
 
-.next{
-  transform: translateX(-100px);
+.next {
+  transform: translateX(-400px);
 }
 
-.prev{
-  transform: translateX(+100px);
+.prev {
+  transform: translateX(+400px);
 }
 
 .skills {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .skillCard {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
+  transition: 0.6s;
   background-color: #83345e;
   border: 2px;
   border-radius: 5px;
   height: 350px;
-  width: 275px !important;
+  /* width: 275px !important;*/
 
   text-align: center;
   padding-top: 3em;
@@ -135,9 +140,14 @@ nav {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-.cardImg {
+.cardImg img {
   width: 100px;
   height: 100px;
+}
+
+.cardImg {
+  width: 100%;
+  height: 100%;
   filter: brightness(0.8) grayscale(0.9);
 }
 
@@ -203,8 +213,22 @@ nav {
 }
 
 /* MEDIA RESPONSIVE */
+@media only screen and (max-width: 1350px) {
+  .nav-offset {
+    margin-inline-start: 7%;
+    margin-inline-end: 1%;
+  }
+  .navbar {
+    flex-wrap: wrap !important;
+  }
+}
+
 /* Large */
 @media only screen and (max-width: 992px) {
+  .nav-offset {
+    margin-inline-start: 13%;
+    margin-inline-end: 5%;
+  }
   .navbar {
     flex-wrap: wrap !important;
   }
