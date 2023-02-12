@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "AtariClassicSmooth-XzW2";
+  src: url("fonts/AtariClassicSmooth-XzW2.ttf");
+  src: url("fonts/AtariClassicSmooth-XzW2.ttf"), format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
   color: #ffffff;
@@ -7,6 +15,7 @@ nav {
   top: 0;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: rgba(24, 24, 24, 0.5);
+  backdrop-filter: saturate(120%) blur(20px);
 }
 
 body {
@@ -15,17 +24,31 @@ body {
   background-attachment: fixed;
 }
 
+a {
+  transition: 0.3s;
+  text-decoration: none !important;
+}
+
 li {
   list-style: none;
 }
 
-a {
-  transition: 0.3s;
-  color: #ffffff !important;
-  text-decoration: none !important;
+h1,
+h2 {
+  font-family: "Atari Classic Smooth", "Helvetica Neue", sans-serif !important;
+  filter: drop-shadow(-2px 4px 3px #000000);
 }
-nav {
-  backdrop-filter: saturate(120%) blur(20px);
+
+h5 {
+  font-weight: normal !important;
+}
+
+textarea {
+  width: 100% !important; /* Overrides the width of .form-input */
+}
+
+form button {
+  margin-bottom: 2em;
 }
 
 .nav-offset {
@@ -50,13 +73,63 @@ nav {
   margin-right: 5em;
 }
 
-.nav-item:hover {
+.navbar a {
+  color: #ff0072 !important;
+}
+
+.navbar li {
+  margin-top: 1em;
+}
+
+.nav-item {
+  text-transform: uppercase;
+  background: none;
+  text-align: center;
+  font-weight: bold;
+  padding: 0.7em 2em;
+  border: 3px solid #be1963;
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  transition: 0.3s ease all;
+  z-index: 1;
+}
+
+.nav-item::before {
+  transition: 0.5s all ease;
+  top: 0;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  opacity: 0;
+  content: "";
+  position: absolute;
+  background-color: #ff0072;
+  z-index: -1;
+}
+
+.nav-item:hover,
+.nav-item:focus {
   transition: 0.3s;
-  color: #d686af !important;
+  color: #fff !important;
+  background-color: #ff0072;
+}
+
+.nav-item:hover::before,
+.nav-item:focus::before {
+  transition: 0.5s all ease;
+  left: 0;
+  right: 0;
+  opacity: 1;
+}
+
+.nav-item:active {
+  transform: scale(0.9);
 }
 
 .nav-logo {
-  margin-top: 1em;
+  margin-top: 0.4em;
 }
 
 .job_Position {
@@ -74,7 +147,7 @@ nav {
   background: none;
   width: 10vw !important; /* Bootstrap Row width override */
   height: 30%;
-  left: 0vw;
+  left: -8vw;
   transform: rotate(180deg);
   position: absolute;
   display: flex;
@@ -88,7 +161,7 @@ nav {
   background: none;
   width: 10vw !important; /* Bootstrap Row width override */
   height: 30%;
-  right: 0vw;
+  right: -8vw;
   position: absolute;
   display: flex;
   align-items: center;
@@ -100,6 +173,19 @@ nav {
   transition: 0.3s;
   filter: invert(90%) sepia(19%) saturate(2584%) hue-rotate(283deg)
     brightness(89%) contrast(87%);
+}
+
+.hidden {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(-100%);
+  transition: all 1s;
+}
+
+.show {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateX(0%);
 }
 
 .inactive {
@@ -172,6 +258,11 @@ nav {
   margin-bottom: 5em;
 }
 
+.project a {
+  color: #fff;
+  font-weight: 500;
+}
+
 .btn {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -197,10 +288,72 @@ nav {
   filter: brightness(0.9);
 }
 
+.form label {
+  display: block;
+  font-size: 1.2em;
+}
+
+.form-input {
+  position: relative;
+  color: #000000;
+  padding: 10px;
+  width: 20em;
+  font-size: 16px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  opacity: 0.5;
+  border: inset;
+  border-color: #a53c76;
+  border-width: 3px;
+  filter: blur(0.7px);
+  filter: drop-shadow(-2px 4px 5px #000000);
+  margin-bottom: 1vw !important;
+}
+
+.form-input:focus {
+  filter: blur(0);
+  border-color: linear-gradient(to right, #a53c76, #6d254c);
+  outline: none;
+}
+
 .footer {
   background-color: #6c455a;
   bottom: 0;
   width: 100%;
+}
+
+.social-menu ul {
+  background-color: #6c455a;
+  position: absolute;
+  padding: 2em;
+  margin-top: 8em;
+  display: flex;
+}
+
+.social-menu ul li {
+  list-style: none;
+  padding: 1.1em;
+}
+
+.social-menu ul li a {
+  position: relative;
+  display: block;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #a53c76;
+  text-align: center;
+  transition: 0.4s;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+}
+
+.social-menu img {
+  margin-top: 27%;
+  width: 2.2em;
+}
+.social-menu ul li a:hover {
+  transform: translate(0, -10%);
+  background: linear-gradient(to right, #a53c76, #6d254c);
 }
 
 #about {
@@ -232,11 +385,17 @@ nav {
   .navbar {
     flex-wrap: wrap !important;
   }
+  .about {
+    margin-top: -5em;
+  }
 }
 
 /* Small */
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 655px) {
   .navbar {
     flex-wrap: wrap !important;
+  }
+  .about {
+    margin-top: -3em;
   }
 }
