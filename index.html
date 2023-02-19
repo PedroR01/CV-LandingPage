@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My project</title>
+    <title>Presenting Robinet</title>
 
     <!--EmailJS MAIL API-->
     <script
@@ -18,7 +18,7 @@
     </script>
 
     <!-- HTML favicon Browser icon-->
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="img/PARLogo.png" />
     <!-- OG Protocol -->
     <meta property="og:title" content="The Rock" />
     <meta property="og:type" content="video.movie" />
@@ -36,7 +36,16 @@
     <!-- Bootstrap CSS file link -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
   </head>
+
   <body>
+    <section id="pre-loader">
+      <img
+        id="loading-img"
+        src="img/PARLogo.png"
+        alt="Loading web page. (The loader image is not displaying for some reason. You could try to change your browser :)"
+      />
+    </section>
+
     <!-- HEADER -->
     <header>
       <!-- NAV-BAR -->
@@ -55,48 +64,47 @@
         </div>
       </nav>
     </header>
-
     <!-- ABOUT CONTENT SECTION -->
-    <section class="container hidden" id="about">
-      <div class="row">
-        <div class="container col-lg-4">
-          <img
-            src="img/lifes.png"
-            id="hearts"
-            alt="2d health icon decoration"
-          />
-          <h1>Pedro<br />Robinet</h1>
-          <h5 class="job_Position">Game & Web developer</h5>
-          <img
-            src="img/platform.png"
-            id="platform"
-            alt="2d platform decoration image"
-          />
+    <section class="hidden" id="about">
+      <div class="container">
+        <div class="row">
+          <div class="container col-lg-4">
+            <ul class="testing">
+              <li class="heart1"><img src="img/lifes.png" alt="" /></li>
+              <li class="heart2"><img src="img/lifes.png" alt="" /></li>
+              <li class="heart3"><img src="img/lifes.png" alt="" /></li>
+            </ul>
+            <img
+              src="img/lifes.png"
+              id="hearts"
+              alt="2d health icon decoration"
+            />
+            <h1>Pedro<br />Robinet</h1>
+          </div>
+          <div class="container col-lg-8">
+            <h5 class="job_Position">Game & Web developer</h5>
+            <img
+              src="img/platform.png"
+              id="platform"
+              alt="2d platform decoration image"
+            />
+          </div>
         </div>
-        <div class="container col-lg-8">
-          <img
-            src="https://www.showmetech.com.br/wp-content/uploads//2020/09/SlimPowerlessEkaltadeta-size_restricted.gif"
-            alt="2d Me animated gif"
-            autoplay
-            loop
-            width="100%"
-            height="70%"
-          />
+        <!-- USAR SPAN Y CLASES PARA MARCAR PALABRAS CLAVE -->
+        <div class="container about">
+          <h4>Once upon a time...</h4>
+          <p>
+            Actualmente me encuentro estudiando la Licenciatura en Diseño
+            Multimedia. Mi objetivo laboral y orientación en mis estudios tanto
+            universitarios como autodidactas y terciarios es el desarrollo y
+            programación en videojuegos. Actualmente me encuentro estudiando y
+            profundizando C# integrado a Unity y C++ implementado en Unreal
+            Engine 5, me gusta trabajar en equipo y busco siempre aprender más
+            conocimientos relacionados a este rubro de parte de aquellos que
+            estén predispuestos a compartir conocimientos y de esta manera ser
+            más eficiente y profesional.
+          </p>
         </div>
-      </div>
-      <!-- USAR SPAN Y CLASES PARA MARCAR PALABRAS CLAVE -->
-      <div class="container about">
-        <p>
-          Actualmente me encuentro estudiando la Licenciatura en Diseño
-          Multimedia. Mi objetivo laboral y orientación en mis estudios tanto
-          universitarios como autodidactas y terciarios es el desarrollo y
-          programación en videojuegos. Actualmente me encuentro estudiando y
-          profundizando C# integrado a Unity y C++ implementado en Unreal Engine
-          5, me gusta trabajar en equipo y busco siempre aprender más
-          conocimientos relacionados a este rubro de parte de aquellos que estén
-          predispuestos a compartir conocimientos y de esta manera ser más
-          eficiente y profesional.
-        </p>
       </div>
     </section>
 
@@ -104,12 +112,18 @@
     <section class="container hidden" id="skills">
       <div class="container">
         <h4>Game developer</h4>
-        <div class="row">
-          <button class="prev-btn slider-btn">
-            <img src="img/arrow.png" alt="" />
+        <div class="row dev-Tools">
+          <button class="prev-btn pacman-btn">
+            <ul class="pacman-btn-food">
+              <li class="circles"></li>
+              <li class="circles"></li>
+            </ul>
           </button>
-          <button class="next-btn slider-btn">
-            <img src="img/arrow.png" alt="" />
+          <button class="next-btn pacman-btn">
+            <ul class="pacman-btn-food">
+              <li class="circles"></li>
+              <li class="circles"></li>
+            </ul>
           </button>
           <ul class="skills">
             <li class="gameDev-Card skillCard col-lg-3">
@@ -165,12 +179,18 @@
           </ul>
         </div>
         <h4>Web Developer</h4>
-        <div class="row">
-          <button class="prev-btn slider-btn">
-            <img src="img/arrow.png" alt="" />
+        <div class="row dev-Tools">
+          <button class="prev-btn pacman-btn">
+            <ul class="pacman-btn-food">
+              <li class="circles"></li>
+              <li class="circles"></li>
+            </ul>
           </button>
-          <button class="next-btn slider-btn">
-            <img src="img/arrow.png" alt="" />
+          <button class="next-btn pacman-btn">
+            <ul class="pacman-btn-food">
+              <li class="circles"></li>
+              <li class="circles"></li>
+            </ul>
           </button>
           <ul class="skills">
             <li class="webDev-Card skillCard col-lg-3">
@@ -318,52 +338,59 @@
 
     <!-- CONTACT FORM -->
     <!-- Meter animacion de input sin completar con un minitexto en rojo que se despliega y los bordes del input en rojo blur shadow con un pequeño movimiento -->
-    <section class="container hidden">
-      <h2>Contact Me</h2>
-      <h5>Estimates, questions, information? Dont hesitate to contact me.</h5>
-      <form class="form" id="contact-form">
-        <div class="row">
-          <div class="col-md-4">
-            <label>Name</label>
-            <input type="text" class="form-input" id="name" required />
+    <section id="contact">
+      <div class="container hidden">
+        <h2>Contact Me</h2>
+        <h5>Estimates, questions, information? Dont hesitate to contact me.</h5>
+        <form class="form" id="contact-form">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Name</label>
+              <input type="text" class="form-input" id="name" required />
+            </div>
+            <div class="col-md-8">
+              <label>Email</label>
+              <input type="email" class="form-input" id="mail_id" required />
+            </div>
           </div>
-          <div class="col-md-8">
-            <label>Email</label>
-            <input type="email" class="form-input" id="mail_id" required />
+          <div class="row">
+            <div class="col-md-12">
+              <label for="">Human verification</label>
+              <input
+                type="text"
+                class="form-input"
+                id="verification"
+                required
+              />
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <label for="">Human verification</label>
-            <input type="text" class="form-input" id="verification" required />
+          <div class="row">
+            <div class="col-md-12">
+              <label>Subject</label>
+              <input type="text" class="form-input" id="subject" required />
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <label>Subject</label>
-            <input type="text" class="form-input" id="subject" required />
+          <div class="row">
+            <div class="col-md-12">
+              <label>Message</label>
+              <textarea
+                type="text"
+                class="form-input"
+                id="message"
+                required
+              ></textarea>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <label>Message</label>
-            <textarea
-              type="text"
-              class="form-input"
-              id="message"
-              required
-            ></textarea>
-          </div>
-        </div>
 
-        <button
-          onclick="SendMail()"
-          type="submit"
-          class="btn btn-primary btn-lg"
-        >
-          <img src="img/emailSendIcon.png" alt="" />Send Email
-        </button>
-      </form>
+          <button
+            onclick="SendMail()"
+            type="submit"
+            class="btn btn-primary btn-lg"
+          >
+            <img src="img/emailSendIcon.png" alt="" />Send Email
+          </button>
+        </form>
+      </div>
     </section>
 
     <!-- FOOTER -->

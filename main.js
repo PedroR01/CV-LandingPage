@@ -8,120 +8,108 @@ const observer = new IntersectionObserver((entries) => {
     entry.isIntersecting
       ? entry.target.classList.add("show")
       : entry.target.classList.remove("show");
-    /*
-    if(entry.isIntersecting)
-    {
-      entry.target.classList.add(".show");
-    }
-    else
-    entry.target.classList.remove(".show");
-    */
   });
 });
 
 const hiddenElements = document.querySelectorAll(".hidden");
 hiddenElements.forEach((element) => observer.observe(element)); // calling the function
 
-// SLIDER SKILLS SECTION
+// SLIDER FOR SKILLS SECTION
 const gameDevSkills = document.querySelectorAll(".gameDev-Card");
-const webDevSkills = [...document.querySelectorAll(".webDev-Card")];
-const nxtBtn = [...document.querySelectorAll(".next-btn")];
-const preBtn = [...document.querySelectorAll(".prev-btn")];
+const webDevSkills = document.querySelectorAll(".webDev-Card");
+const nxtBtn = document.querySelectorAll(".next-btn");
+const preBtn = document.querySelectorAll(".prev-btn");
 
 let colSize = 9;
-let cards = 0;
-let lgCol = "col-lg";
 
-function columnDistribution(amount) {
-  let cardSize = colSize / amount;
-  return Math.trunc(cardSize);
+// RETURN COLUMN DISTRIBUTION DEPENDING OF THE AMOUNT OF CARDS THAT NEED TO BE DISPLAYED
+function columnDistribution(activeCount, inactiveCount) {
+  const totalCards = activeCount + inactiveCount;
+  let cardSize = colSize / activeCount;
+  const inactiveCardSize = colSize / inactiveCount;
+  return {
+    active: Math.trunc(cardSize),
+    inactive: Math.trunc(inactiveCardSize),
+  };
 }
 
-function columnCardProportionDetecter(boolean) {
-  cards = 0;
-  if (boolean) {
-    gameDevSkills.forEach((item, i) => {
-      gameDevSkills[i].classList.contains("inactive") ? cards++ : 0;
+// DETECTS THE AMOUNT OF CARDS THAT ARE GOING TO BE DISPLAYED IN EACH SECTION
+function columnCardProportionDetecter(skills, index) {
+  nxtBtn[index].addEventListener("click", () => {
+    let activeCount = 0;
+    let inactiveCount = 0;
+
+    skills.forEach((item, i) => {
+      if (skills[i].classList.contains("inactive")) {
+        inactiveCount++;
+      } else {
+        activeCount++;
+      }
     });
-  } else {
-    webDevSkills.forEach((item, i) => {
-      webDevSkills[i].classList.contains("inactive") ? cards++ : 0;
+
+    const columnSizes = columnDistribution(activeCount, inactiveCount);
+
+    skills.forEach((item, i) => {
+      if (skills[i].classList.contains("inactive")) {
+        skills[i].classList.remove("inactive");
+        skills[i].classList.add("col-lg-" + columnSizes.inactive);
+        if (skills[i].classList.contains("next")) {
+          skills[i].classList.remove("next");
+        } else if (skills[i].classList.contains("prev")) {
+          skills[i].classList.remove("prev");
+        }
+      } else {
+        skills[i].classList.add("col-lg-" + columnSizes.active);
+        skills[i].classList.add("inactive");
+      }
     });
-  }
+  });
+
+  preBtn[index].addEventListener("click", () => {
+    let activeCount = 0;
+    let inactiveCount = 0;
+
+    skills.forEach((item, i) => {
+      if (skills[i].classList.contains("inactive")) {
+        inactiveCount++;
+      } else {
+        activeCount++;
+      }
+    });
+
+    const columnSizes = columnDistribution(activeCount, inactiveCount);
+
+    skills.forEach((item, i) => {
+      if (skills[i].classList.contains("inactive")) {
+        skills[i].classList.remove("inactive");
+        skills[i].classList.add("col-lg-" + columnSizes.inactive);
+        if (skills[i].classList.contains("next")) {
+          skills[i].classList.remove("next");
+        } else if (skills[i].classList.contains("prev")) {
+          skills[i].classList.remove("prev");
+        }
+      } else {
+        skills[i].classList.add("col-lg-" + columnSizes.active);
+        skills[i].classList.add("inactive");
+      }
+    });
+  });
 }
 
-nxtBtn[0].addEventListener("click", () => {
-  columnCardProportionDetecter(true);
-});
-nxtBtn[1].addEventListener("click", () => {
-  columnCardProportionDetecter(false);
-});
-preBtn[0].addEventListener("click", () => {
-  columnCardProportionDetecter(true);
-});
-preBtn[1].addEventListener("click", () => {
-  columnCardProportionDetecter(false);
-});
+columnCardProportionDetecter(gameDevSkills, 0);
+columnCardProportionDetecter(webDevSkills, 1);
 
-gameDevSkills.forEach((item, i) => {
-  nxtBtn[0].addEventListener("click", () => {
-    if (gameDevSkills[i].classList.contains("inactive")) {
-      gameDevSkills[i].classList.remove("inactive");
-      gameDevSkills[i].classList.add("col-lg-" + columnDistribution(cards));
-      if (gameDevSkills[i].classList.contains("next")) {
-        gameDevSkills[i].classList.remove("next");
-      } else if (gameDevSkills[i].classList.contains("prev")) {
-        gameDevSkills[i].classList.remove("prev");
-      }
-    } else {
-      gameDevSkills[i].classList.add("inactive");
-      gameDevSkills[i].classList.add("next");
-    }
-  });
-  preBtn[0].addEventListener("click", () => {
-    if (gameDevSkills[i].classList.contains("inactive")) {
-      gameDevSkills[i].classList.remove("inactive");
-      gameDevSkills[i].classList.add("col-lg-" + columnDistribution(cards));
-      if (gameDevSkills[i].classList.contains("next")) {
-        gameDevSkills[i].classList.remove("next");
-      } else if (gameDevSkills[i].classList.contains("prev")) {
-        gameDevSkills[i].classList.remove("prev");
-      }
-    } else {
-      gameDevSkills[i].classList.add("inactive");
-      gameDevSkills[i].classList.add("prev");
-    }
-  });
-});
+// SLIDER PACMAN BUTTONS ANIMATION
 
-webDevSkills.forEach((item, i) => {
-  nxtBtn[1].addEventListener("click", () => {
-    if (webDevSkills[i].classList.contains("inactive")) {
-      webDevSkills[i].classList.remove("inactive");
-      webDevSkills[i].classList.add("col-lg-" + columnDistribution(cards));
-      if (webDevSkills[i].classList.contains("next")) {
-        webDevSkills[i].classList.remove("next");
-      } else if (webDevSkills[i].classList.contains("prev")) {
-        webDevSkills[i].classList.remove("prev");
-      }
-    } else {
-      webDevSkills[i].classList.add("inactive");
-      webDevSkills[i].classList.add("next");
-    }
+const pacmanButtons = document.querySelectorAll(".next-btn, .prev-btn");
+
+pacmanButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    button.classList.add("animate-pacman");
   });
-  preBtn[1].addEventListener("click", () => {
-    if (webDevSkills[i].classList.contains("inactive")) {
-      webDevSkills[i].classList.remove("inactive");
-      webDevSkills[i].classList.add("col-lg-" + columnDistribution(cards));
-      if (webDevSkills[i].classList.contains("next")) {
-        webDevSkills[i].classList.remove("next");
-      } else if (webDevSkills[i].classList.contains("prev")) {
-        webDevSkills[i].classList.remove("prev");
-      }
-    } else {
-      webDevSkills[i].classList.add("inactive");
-      webDevSkills[i].classList.add("prev");
-    }
+
+  button.addEventListener("animationend", () => {
+    button.classList.remove("animate-pacman");
   });
 });
 
