@@ -158,9 +158,9 @@ function SendMail() {
   };
 
   emailjs
-    .send("service_7pb252k", "template_f24ayi6", params)
+    .send("service_7pb252k", "template_f24ayi6", params, "GNKJKiGfDkPDJvM52")
     .then(function (res) {
-      alert("Mail sent successfully :)" + res.status);
+      alert("Mail sent successfully :)");
     });
 }
 
