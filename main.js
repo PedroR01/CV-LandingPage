@@ -14,6 +14,14 @@ const observer = new IntersectionObserver((entries) => {
 const hiddenElements = document.querySelectorAll(".hidden");
 hiddenElements.forEach((element) => observer.observe(element)); // calling the function
 
+// Display responsive elements
+let actualScreenWidth = window.innerWidth;
+if (actualScreenWidth <= 453) {
+  /*this variable returns this number when the screen width is actually 360*/
+  document.querySelector(".nav-menu").classList.remove("hidden");
+  document.querySelector(".navbar").classList.add("hidden");
+}
+
 // SLIDER FOR SKILLS SECTION
 const gameDevSkills = document.querySelectorAll(".gameDev-Card");
 const webDevSkills = document.querySelectorAll(".webDev-Card");
@@ -35,65 +43,133 @@ function columnDistribution(activeCount, inactiveCount) {
 
 // DETECTS THE AMOUNT OF CARDS THAT ARE GOING TO BE DISPLAYED IN EACH SECTION
 function columnCardProportionDetecter(skills, index) {
-  nxtBtn[index].addEventListener("click", () => {
-    let activeCount = 0;
-    let inactiveCount = 0;
+  if (actualScreenWidth > 453) {
+    nxtBtn[index].addEventListener("click", () => {
+      let activeCount = 0;
+      let inactiveCount = 0;
 
-    skills.forEach((item, i) => {
-      if (skills[i].classList.contains("inactive")) {
-        inactiveCount++;
-      } else {
-        activeCount++;
-      }
-    });
-
-    const columnSizes = columnDistribution(activeCount, inactiveCount);
-
-    skills.forEach((item, i) => {
-      if (skills[i].classList.contains("inactive")) {
-        skills[i].classList.remove("inactive");
-        skills[i].classList.add("col-lg-" + columnSizes.inactive);
-        if (skills[i].classList.contains("next")) {
-          skills[i].classList.remove("next");
-        } else if (skills[i].classList.contains("prev")) {
-          skills[i].classList.remove("prev");
+      skills.forEach((item, i) => {
+        if (skills[i].classList.contains("inactive")) {
+          inactiveCount++;
+        } else {
+          activeCount++;
         }
-      } else {
-        skills[i].classList.add("col-lg-" + columnSizes.active);
-        skills[i].classList.add("inactive");
-      }
-    });
-  });
+      });
 
-  preBtn[index].addEventListener("click", () => {
-    let activeCount = 0;
-    let inactiveCount = 0;
+      // set column distribution for larger screens
+      let columnSizes = columnDistribution(activeCount, inactiveCount);
 
-    skills.forEach((item, i) => {
-      if (skills[i].classList.contains("inactive")) {
-        inactiveCount++;
-      } else {
-        activeCount++;
-      }
-    });
-
-    const columnSizes = columnDistribution(activeCount, inactiveCount);
-
-    skills.forEach((item, i) => {
-      if (skills[i].classList.contains("inactive")) {
-        skills[i].classList.remove("inactive");
-        skills[i].classList.add("col-lg-" + columnSizes.inactive);
-        if (skills[i].classList.contains("next")) {
-          skills[i].classList.remove("next");
-        } else if (skills[i].classList.contains("prev")) {
-          skills[i].classList.remove("prev");
+      skills.forEach((item, i) => {
+        if (skills[i].classList.contains("inactive")) {
+          console.log(actualScreenWidth);
+          skills[i].classList.remove("inactive");
+          skills[i].classList.add("col-lg-" + columnSizes.inactive);
+          if (skills[i].classList.contains("next")) {
+            skills[i].classList.remove("next");
+          } else if (skills[i].classList.contains("prev")) {
+            skills[i].classList.remove("prev");
+          }
+        } else {
+          skills[i].classList.add("col-lg-" + columnSizes.active);
+          skills[i].classList.add("inactive");
         }
-      } else {
-        skills[i].classList.add("col-lg-" + columnSizes.active);
-        skills[i].classList.add("inactive");
-      }
+      });
     });
-  });
+
+    preBtn[index].addEventListener("click", () => {
+      let activeCount = 0;
+      let inactiveCount = 0;
+
+      skills.forEach((item, i) => {
+        if (skills[i].classList.contains("inactive")) {
+          inactiveCount++;
+        } else {
+          activeCount++;
+        }
+      });
+
+      let columnSizes = columnDistribution(activeCount, inactiveCount);
+
+      skills.forEach((item, i) => {
+        if (skills[i].classList.contains("inactive")) {
+          skills[i].classList.remove("inactive");
+          skills[i].classList.add("col-lg-" + columnSizes.inactive);
+          if (skills[i].classList.contains("next")) {
+            skills[i].classList.remove("next");
+          } else if (skills[i].classList.contains("prev")) {
+            skills[i].classList.remove("prev");
+          }
+        } else {
+          skills[i].classList.add("col-lg-" + columnSizes.active);
+          skills[i].classList.add("inactive");
+        }
+      });
+    });
+  } else {
+    // set column distribution for small screens
+    let columnSizes = {
+      active: 12,
+      inactive: 12,
+    };
+    nxtBtn[index].classList.add("hidden");
+    preBtn[index].classList.add("hidden");
+  
+    // Convert NodeList to Array
+    const skillsArray = Array.from(skills);
+    let activeCard, cardIndex;
+  
+    skillsArray.forEach((item, i) => {
+      if (i != 1 && !skillsArray[i].classList.contains("inactive")) {
+        skillsArray[i].classList.add("inactive");
+      }
+  
+      let leftInactive, rightInactive;
+  
+      if (!skillsArray[i].classList.contains("inactive")) {
+        // The only card that remains active
+        activeCard = skillsArray[i];
+        cardIndex = skillsArray.indexOf(activeCard);
+      } else {
+        if (cardIndex == null) {
+          // The first inactive card encountered
+          leftInactive = skillsArray[i];
+        } else {
+          // Determine whether the inactive card is to the left or right of the active card
+          if (i < cardIndex) {
+            leftInactive = skillsArray[i];
+          } else {
+            rightInactive = skillsArray[i];
+          }
+        }
+      }
+  
+      leftInactive ? leftInactive.classList.add("left") : 0;
+      rightInactive ? rightInactive.classList.add("right") : 0;
+  
+      // Add event listeners to swipe cards
+      skillsArray[i].addEventListener("click", () => {
+        if (skillsArray[i].classList.contains("left")) {
+          // Move left card to active position
+          skillsArray[i].classList.remove("left", "inactive");
+          skillsArray[i].classList.add("active");
+          // Deactivate previous active card
+          activeCard.classList.remove("active");
+          activeCard.classList.add("inactive", "right");
+          // Set this card as the new active card
+          activeCard = skillsArray[i];
+        } else if (skillsArray[i].classList.contains("right")) {
+          // Move right card to active position
+          skillsArray[i].classList.remove("right", "inactive");
+          skillsArray[i].classList.add("active");
+          // Deactivate previous active card
+          activeCard.classList.remove("active");
+          activeCard.classList.add("inactive", "left");
+          // Set this card as the new active card
+          activeCard = skillsArray[i];
+        }
+      });
+    });
+  }
 }
 
 columnCardProportionDetecter(gameDevSkills, 0);
@@ -119,11 +195,23 @@ pacmanButtons.forEach((button) => {
 
 // INPUT VALUES VALIDATION
 const form = document.getElementById("contact-form");
+
+let writeOperation = form.querySelector(".verification-label");
+
+const aritmeticOperation = [];
+aritmeticOperation[0] = Math.floor(Math.random() * 100 + 1);
+aritmeticOperation[1] = Math.floor(Math.random() * 100 + 1);
+aritmeticOperation[2] = aritmeticOperation[0] + aritmeticOperation[1];
+
+writeOperation.textContent +=
+  ": (" + aritmeticOperation[0] + "+" + aritmeticOperation[1] + ")";
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const nameInput = form.elements.getElementById("name");
   const emailInput = form.getElementById("mail_id");
+  const verificationInput = form.getElementById("verification");
   const subjectInput = form.getElementById("subject");
   const messageInput = form.getElementById("message");
 
@@ -144,6 +232,11 @@ form.addEventListener("submit", (event) => {
 
   if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailInput.value)) {
     alert("Please enter a valid email address");
+    return;
+  }
+
+  if (verificationInput.value != aritmeticOperation[2]) {
+    alert("Human verification gone wrong. Please try again");
     return;
   }
 });
