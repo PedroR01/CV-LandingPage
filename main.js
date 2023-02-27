@@ -21,6 +21,10 @@ if (actualScreenWidth <= 453) {
   document.querySelector(".nav-menu").classList.remove("hidden");
   document.querySelector(".navbar").classList.add("hidden");
 }
+else{
+  document.querySelector(".nav-menu").classList.add("hidden");
+  document.querySelector(".navbar").classList.remove("hidden");
+}
 
 // SLIDER FOR SKILLS SECTION
 const gameDevSkills = document.querySelectorAll(".gameDev-Card");
