@@ -22,7 +22,7 @@ if (actualScreenWidth <= 453) {
   document.querySelector(".navbar").classList.add("hidden");
 }
 else{
-  document.querySelector(".nav-menu").classList.add("hidden");
+  document.querySelector(".navigation").classList.add("hidden");
   document.querySelector(".navbar").classList.remove("hidden");
 }
 
