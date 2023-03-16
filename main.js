@@ -14,17 +14,8 @@ const observer = new IntersectionObserver((entries) => {
 const hiddenElements = document.querySelectorAll(".hidden");
 hiddenElements.forEach((element) => observer.observe(element)); // calling the function
 
-// Display responsive elements
-let actualScreenWidth = window.innerWidth;
-if (actualScreenWidth <= 453) {
-  /*this variable returns this number when the screen width is actually 360*/
-  document.querySelector(".nav-menu").classList.remove("hidden");
-  document.querySelector(".navbar").classList.add("hidden");
-}
-else{
-  document.querySelector(".navigation").classList.add("hidden");
-  document.querySelector(".navbar").classList.remove("hidden");
-}
+let small; // Switch his state according to window proportions
+window.innerWidth > 602 ? (small = false) : (small = true);
 
 // SLIDER FOR SKILLS SECTION
 const gameDevSkills = document.querySelectorAll(".gameDev-Card");
@@ -36,7 +27,6 @@ let colSize = 9;
 
 // RETURN COLUMN DISTRIBUTION DEPENDING OF THE AMOUNT OF CARDS THAT NEED TO BE DISPLAYED
 function columnDistribution(activeCount, inactiveCount) {
-  const totalCards = activeCount + inactiveCount;
   let cardSize = colSize / activeCount;
   const inactiveCardSize = colSize / inactiveCount;
   return {
@@ -47,7 +37,27 @@ function columnDistribution(activeCount, inactiveCount) {
 
 // DETECTS THE AMOUNT OF CARDS THAT ARE GOING TO BE DISPLAYED IN EACH SECTION
 function columnCardProportionDetecter(skills, index) {
-  if (actualScreenWidth > 453) {
+  if (!small) {
+    if (
+      nxtBtn[index].classList.contains("hidden") ||
+      preBtn[index].classList.contains("hidden")
+    ) {
+      nxtBtn[index].classList.remove("hidden");
+      preBtn[index].classList.remove("hidden");
+    }
+
+    for (let i = 0; i < 3; i++) {
+      if (
+        skills[i].classList.contains("left") ||
+        skills[i].classList.contains("right")
+      ) {
+        skills[i].classList.remove("left");
+        skills[i].classList.remove("right");
+        skills[i].classList.remove("inactive");
+        skills[i].classList.add("active");
+      }
+    }
+
     nxtBtn[index].addEventListener("click", () => {
       let activeCount = 0;
       let inactiveCount = 0;
@@ -60,21 +70,23 @@ function columnCardProportionDetecter(skills, index) {
         }
       });
 
+      if (activeCount <= 1) {
+        activeCount = 3; // If there is only 1 active card and the window isn´t small it means that the size of the window screen has been increased.
+        inactiveCount = inactiveCount - (activeCount - 1);
+      }
+
       // set column distribution for larger screens
       let columnSizes = columnDistribution(activeCount, inactiveCount);
 
       skills.forEach((item, i) => {
         if (skills[i].classList.contains("inactive")) {
-          console.log(actualScreenWidth);
           skills[i].classList.remove("inactive");
+          skills[i].classList.remove("next");
+          skills[i].classList.remove("prev");
           skills[i].classList.add("col-lg-" + columnSizes.inactive);
-          if (skills[i].classList.contains("next")) {
-            skills[i].classList.remove("next");
-          } else if (skills[i].classList.contains("prev")) {
-            skills[i].classList.remove("prev");
-          }
         } else {
           skills[i].classList.add("col-lg-" + columnSizes.active);
+          skills[i].classList.add("next");
           skills[i].classList.add("inactive");
         }
       });
@@ -92,43 +104,43 @@ function columnCardProportionDetecter(skills, index) {
         }
       });
 
+      if (activeCount <= 1) {
+        activeCount = 3; // If there is only 1 active card and the window isn´t small it means that the size of the window screen has been increased.
+        inactiveCount = inactiveCount - (activeCount - 1);
+      }
+
       let columnSizes = columnDistribution(activeCount, inactiveCount);
 
       skills.forEach((item, i) => {
         if (skills[i].classList.contains("inactive")) {
           skills[i].classList.remove("inactive");
+          skills[i].classList.remove("next");
+          skills[i].classList.remove("prev");
           skills[i].classList.add("col-lg-" + columnSizes.inactive);
-          if (skills[i].classList.contains("next")) {
-            skills[i].classList.remove("next");
-          } else if (skills[i].classList.contains("prev")) {
-            skills[i].classList.remove("prev");
-          }
         } else {
           skills[i].classList.add("col-lg-" + columnSizes.active);
+          skills[i].classList.add("prev");
           skills[i].classList.add("inactive");
         }
       });
     });
   } else {
-    // set column distribution for small screens
-    let columnSizes = {
-      active: 12,
-      inactive: 12,
-    };
+    // Como hacer para que todo esto se revierta en el condicional anterior por si se vuelve a escalar la pantalla
+    // uno de los que quedo como left y uno de los que quedo como right pasan a ser active, en caso de que no haya left o right, 2 de los que si haya pasan a ser active
     nxtBtn[index].classList.add("hidden");
     preBtn[index].classList.add("hidden");
-  
+
     // Convert NodeList to Array
     const skillsArray = Array.from(skills);
     let activeCard, cardIndex;
-  
+
     skillsArray.forEach((item, i) => {
       if (i != 1 && !skillsArray[i].classList.contains("inactive")) {
         skillsArray[i].classList.add("inactive");
       }
-  
+
       let leftInactive, rightInactive;
-  
+
       if (!skillsArray[i].classList.contains("inactive")) {
         // The only card that remains active
         activeCard = skillsArray[i];
@@ -146,10 +158,10 @@ function columnCardProportionDetecter(skills, index) {
           }
         }
       }
-  
+
       leftInactive ? leftInactive.classList.add("left") : 0;
       rightInactive ? rightInactive.classList.add("right") : 0;
-  
+
       // Add event listeners to swipe cards
       skillsArray[i].addEventListener("click", () => {
         if (skillsArray[i].classList.contains("left")) {
@@ -176,8 +188,35 @@ function columnCardProportionDetecter(skills, index) {
   }
 }
 
-columnCardProportionDetecter(gameDevSkills, 0);
-columnCardProportionDetecter(webDevSkills, 1);
+//--DISPLAY RESPONSIVE ELEMENTS--//
+function responsiveNav() {
+  let actualScreenWidth = window.innerWidth;
+
+  if (actualScreenWidth <= 602) {
+    document.querySelector(".navigation").classList.remove("hidden");
+    document.querySelector(".navbar").classList.add("hidden");
+    small = true;
+  } else {
+    document.querySelector(".navigation").classList.add("hidden");
+    document.querySelector(".navbar").classList.remove("hidden");
+    small = false;
+  }
+}
+
+// Nav + Sliders
+function responsiveElements() {
+  responsiveNav();
+  columnCardProportionDetecter(gameDevSkills, 0);
+  columnCardProportionDetecter(webDevSkills, 1);
+}
+
+// Loading elements acording displays and proportions when the page is first loaded
+responsiveElements();
+
+// Calling the function again when the page window is resized
+window.addEventListener("resize", function () {
+  responsiveElements();
+});
 
 // SLIDER PACMAN BUTTONS ANIMATION
 

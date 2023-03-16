@@ -1,7 +1,7 @@
 @font-face {
   font-family: "AtariClassicSmooth-XzW2";
-  src: url("fonts/AtariClassicSmooth-XzW2.ttf");
-  src: url("fonts/AtariClassicSmooth-XzW2.ttf"), format("truetype");
+  src: url("/fonts/AtariClassicSmooth-XzW2.ttf");
+  src: url("/fonts/AtariClassicSmooth-XzW2.ttf"), format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -519,7 +519,7 @@ form button {
   content: "";
   position: absolute;
   z-index: -5;
-  top: 216em; /*180vw*/
+  margin-top: -3%;
   width: 100%;
   height: 60%;
   background: url(img/contactBg.png);
@@ -580,8 +580,8 @@ form button {
     flex-wrap: wrap !important;
   }
 
-  .contact::before {
-    top: 225vw;
+  #contact::before {
+    margin-top: -4%;
   }
 }
 
@@ -713,12 +713,127 @@ form button {
   }
 
   #contact::before {
-    top: 241em;
-    height: 45%;
+    margin-top: -4%;
+    height: 47%;
   }
 }
 
-/* Small */
+/* Breakpoint target to resized window on desktop */
+@media only screen and (max-width: 602px) {
+  .nav-offset {
+    height: 7vw;
+  }
+
+  #about {
+    padding-top: 8em;
+    margin-bottom: 64vw;
+  }
+
+  .nav-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /*----------------- Responsive nav class start------------- */
+
+  .navigation {
+    text-align: center;
+    margin-top: 3vw;
+  }
+
+  .navigation input:checked ~ .nav-menu {
+    opacity: 1;
+    display: inline-flex;
+    pointer-events: initial;
+    background-color: rgb(32, 32, 32);
+    border-radius: 5px;
+    cursor: default;
+    transform: scale(1) translateY(0px);
+    box-shadow: #000000;
+    transition: 0.3s ease-in-out;
+  }
+
+  .navigation input:checked ~ .nav-logo {
+    transition: 0.3s ease-in-out;
+    top: 0;
+    transform: rotate(-45deg);
+  }
+
+  .navigation input:not(checked) ~ .nav-logo {
+    transition: 0.3s ease-in-out;
+  }
+
+  .navigation ul {
+    margin-top: 3.2vw;
+  }
+
+  .nav-menu {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transform: scale(0) translateY(-350px);
+    z-index: -5;
+    transition: 0.3s ease-in-out;
+  }
+
+  .nav-menu li {
+    border-bottom: solid 2px rgb(82, 82, 82);
+    border-radius: 6px;
+  }
+
+  .nav-menu li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 6vw 27vw; /*padding: 5vw 20vw;*/
+    font-size: 7vw; /*6vw*/
+    line-height: 1;
+    transition: 0.3s;
+  }
+
+  .nav-menu li a:active {
+    box-shadow: 0 -5px 0px #fff inset, 500px 0 0 rgba(255, 255, 255, 0.03) inset;
+  }
+
+  .toggle-menu {
+    position: absolute;
+    width: 2em;
+    height: 40%;
+    z-index: 3;
+    cursor: pointer;
+    opacity: 0;
+  }
+  /*----------------- Responsive nav class end------------- */
+
+  .inactive {
+    visibility: visible;
+    opacity: 1;
+    filter: brightness(0.6);
+    z-index: 1;
+    transform: scale(0.8);
+  }
+
+  .active {
+    z-index: 5;
+  }
+
+  .active .cardImg{
+    filter: brightness(1) grayscale(0);
+  }
+
+  .left {
+    left: 5vw;
+  }
+
+  .right {
+    right: 5vw;
+  }
+
+}
 @media only screen and (max-width: 414px) {
   /* From 360px */
 
@@ -736,6 +851,7 @@ form button {
 
   .nav-offset {
     margin-inline-start: 0;
+    margin-block-end: 7%;
     height: 10vw;
   }
 
@@ -761,125 +877,15 @@ form button {
     width: 13vw;
   }
 
-  .navigation {
-    text-align: center;
-    margin-top: 3vw;
-  }
-
-  .navigation input:checked ~ .nav-menu {
-    opacity: 1;
-    display: inline-flex;
-    pointer-events: initial;
-    background-color: rgb(32, 32, 32);
-    border-radius: 5px;
-    cursor: default;
-    transform: scale(1) translateY(0px);
-    box-shadow: #000000;
-    transition: 0.3s ease-in-out;
-    /*
-    animation: openMenu;
-    -webkit-animation-fill-mode: forwards; 
-    -moz-animation-fill-mode: forwards; 
-    -o-animation-fill-mode: forwards; 
-    -ms-animation-fill-mode: forwards; 
-    animation-fill-mode: forwards;
-    */ /* Chrome 16+, Safari 4+, FF 5+, IE 10+ */
-  }
-
-  @keyframes openMenu {
-    0% {
-      opacity: 1;
-    }
-
-    10% {
-    }
-
-    20% {
-    }
-
-    30% {
-      transform: translateY(0px);
-    }
-
-    40% {
-    }
-
-    50% {
-    }
-
-    60% {
-    }
-    100% {
-      transform: scale(1);
-      display: inline-flex;
-      cursor: default;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 10;
-    }
-  }
-
-  .navigation input:checked ~ .nav-logo {
-    transition: 0.3s ease-in-out;
-    top: 0;
-    transform: rotate(-45deg);
-  }
-
-  .navigation input:not(checked) ~ .nav-logo {
-    transition: 0.3s ease-in-out;
-  }
-
   .navigation ul {
-    margin-top: 3.2vw;
     padding-left: 0;
-  }
-
-  .nav-menu {
-    pointer-events: none;
-    cursor: default;
-    opacity: 0;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    transform: scale(0) translateY(-350px);
-    z-index: -5;
-    transition: 0.3s ease-in-out;
-  }
-
-  .nav-menu li {
-    border-bottom: solid 2px rgb(82, 82, 82);
-    border-radius: 6px;
-  }
-
-  .nav-menu li a {
-    color: #fff;
-    text-decoration: none;
-    display: block;
-    padding: 6vw 27vw;
-    font-size: 7vw;
-    line-height: 1;
-    transition: 0.3s;
-  }
-
-  .nav-menu li a:active {
-    box-shadow: 0 -5px 0px #fff inset, 500px 0 0 rgba(255, 255, 255, 0.03) inset;
-  }
-
-  .toggle-menu {
-    position: absolute;
-    width: 2em;
-    height: 40%;
-    z-index: 3;
-    cursor: pointer;
-    opacity: 0;
   }
 
   /*--------- NAV STYLE END --------------- */
 
   #about {
     padding: 0;
-    padding-top: 3em;
+    padding-top: 7em;
     margin-bottom: 0;
     text-align: justify;
     margin-bottom: 40vw;
@@ -967,26 +973,6 @@ form button {
     /*añadir container a las tarjetas*/
   }
 
-  .inactive {
-    visibility: visible;
-    opacity: 1;
-    filter: brightness(0.6);
-    z-index: 1;
-    transform: scale(0.8);
-  }
-
-  .active {
-    z-index: 5;
-  }
-
-  .left {
-    left: 5vw;
-  }
-
-  .right {
-    right: 5vw;
-  }
-
   #projects {
     margin-bottom: 10vw;
   }
@@ -1009,8 +995,8 @@ form button {
   }
 
   #contact::before {
-    top: 989vw; /*em units scales better for responsive design*/
-    height: 92%;
+    margin-top: -7%;
+    height: 63%;
     background-position-y: 0vw;
     filter: blur(3px);
   }
