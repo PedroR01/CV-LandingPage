@@ -12,4 +12,6 @@ It has a responsive design with **specific breakpoints**. This ones are not pick
 The breakpoints in matter are: <br>
 - **1366px** (Notebook/Desktop)<br>
 - **810px** (Tablet) <br>
-- **414px** (Mobile) <br>
+- **414px** (Mobile) <br> <br>
+
+In case you are using **Brave browser** it is recommended that you disable the brave shields. If they are not deactivated, some elements may not load correctly, such as the font.
