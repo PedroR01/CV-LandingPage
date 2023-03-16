@@ -1,7 +1,7 @@
 @font-face {
   font-family: "AtariClassicSmooth-XzW2";
-  src: url("/fonts/AtariClassicSmooth-XzW2.ttf");
-  src: url("/fonts/AtariClassicSmooth-XzW2.ttf"), format("truetype");
+  src: url("../fonts/AtariClassicSmooth-XzW2.ttf");
+  src: url("../fonts/AtariClassicSmooth-XzW2.ttf"), format("truetype");
   font-weight: normal;
   font-style: normal;
 }
