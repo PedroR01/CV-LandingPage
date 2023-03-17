@@ -8,7 +8,7 @@
 
 * {
   box-sizing: border-box;
-  color: #ECF9FF;
+  color: #ecf9ff;
   scrollbar-color: #bd9711ac transparent; /*firefox scrollbar */
 }
 
@@ -65,7 +65,7 @@ h2,
 h3,
 h4 {
   text-transform: uppercase;
-  color: #fbca1f!important;
+  color: #fbca1f !important;
 }
 
 h5 {
@@ -173,12 +173,27 @@ form button {
 .job_Position {
   margin-top: 2em !important;
   text-align: center;
+  margin-right: 0px !important;
+  padding: 0px;
+  width: 45% !important;
+}
+
+.job_Position h5 {
+  font-size: 1.35vw;
+  margin-bottom: 0.45vw;
 }
 
 .about {
   font-size: large;
   margin-top: 1.8em;
   margin-bottom: 6em;
+}
+
+.cv-photo {
+  border-radius: 60%;
+  height: 96%;
+  margin-top: auto !important;
+  margin-bottom: auto;
 }
 
 .dev-Tools {
@@ -506,16 +521,6 @@ form button {
   text-align: center;
 }
 
-#hearts:hover {
-  transition: all 1s ease-in-out;
-  transform: scale(1.2);
-}
-
-#hearts:not(:hover) {
-  transition: all 1s ease-in;
-  transform: rotateY(360deg) scale(1.4);
-}
-
 #contact::before {
   content: "";
   position: absolute;
@@ -581,6 +586,14 @@ form button {
     flex-wrap: wrap !important;
   }
 
+  #about h1 {
+    font-size: 5vw;
+  }
+
+  #platform {
+    width: 54%;
+  }
+
   #contact::before {
     margin-top: -4%;
   }
@@ -616,8 +629,8 @@ form button {
 
   #about {
     padding: 0;
-    padding-top: 3em;
-    margin-bottom: 46vw;
+    padding-top: 10em;
+    margin-bottom: 44vw;
   }
 
   #about::before {
@@ -630,17 +643,21 @@ form button {
     font-size: 3.6em;
   }
 
-  #hearts {
-    width: 6em;
-    margin-left: 1.5em;
+  #platform {
+    width: 33%;
+  }
+
+  .job_Position h5 {
+    font-size: 2.35vw;
   }
 
   .job_Position {
     margin-top: 1.5em !important;
+    width: 100% !important;
   }
 
   .about {
-    margin-top: 15vw;
+    margin-top: 13vw;
   }
 
   .about p {
@@ -728,6 +745,14 @@ form button {
   #about {
     padding-top: 8em;
     margin-bottom: 64vw;
+  }
+
+  #about h1 {
+    font-size: 7vw;
+  }
+
+  #contact::before {
+    height: 62%;
   }
 
   .nav-logo {
@@ -822,7 +847,7 @@ form button {
     z-index: 5;
   }
 
-  .active .cardImg{
+  .active .cardImg {
     filter: brightness(1) grayscale(0);
   }
 
@@ -833,7 +858,6 @@ form button {
   .right {
     right: 5vw;
   }
-
 }
 @media only screen and (max-width: 414px) {
   /* From 360px */
@@ -900,19 +924,21 @@ form button {
 
   #about h1 {
     margin-top: 0.4em;
-    font-size: 12vw;
+    font-size: 8vw;
     justify-content: center;
   }
 
-  #hearts {
-    position: relative;
-    left: 30%;
-    width: 23vw;
-    margin-left: 1.5em;
+  .cv-photo{
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .job_Position {
     margin-top: 1.5em !important;
+  }
+
+  .job_Position h5{
+    font-size: 3.35vw;
   }
 
   #platform {

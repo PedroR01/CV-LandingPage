@@ -135,6 +135,8 @@ function columnCardProportionDetecter(skills, index) {
     let activeCard, cardIndex;
 
     skillsArray.forEach((item, i) => {
+      skills[i].classList.remove("next");
+      skills[i].classList.remove("prev");
       if (i != 1 && !skillsArray[i].classList.contains("inactive")) {
         skillsArray[i].classList.add("inactive");
       }
